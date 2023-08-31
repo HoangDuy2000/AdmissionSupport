@@ -14,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -24,24 +27,31 @@ import javax.persistence.Table;
 public class Scores implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
-    private double score;
+    @Min(value = 10, message = "{scores.score.lenErr}")
+    @Max(value = 30, message = "{scores.score.lenErr}")
+    private Double score;
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Facultys facultyId;
 
+    public Scores() {
+    }
+
+    
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -62,14 +72,14 @@ public class Scores implements Serializable{
     /**
      * @return the score
      */
-    public double getScore() {
+    public Double getScore() {
         return score;
     }
 
     /**
      * @param score the score to set
      */
-    public void setScore(double score) {
+    public void setScore(Double score) {
         this.score = score;
     }
 
@@ -77,13 +87,27 @@ public class Scores implements Serializable{
      * @return the facultysId
      */
     public Facultys getFacultysId() {
-        return facultyId;
+        return getFacultyId();
     }
 
     /**
      * @param facultysId the facultysId to set
      */
     public void setFacultysId(Facultys facultysId) {
-        this.facultyId = facultysId;
+        this.setFacultyId(facultysId);
+    }
+
+    /**
+     * @return the facultyId
+     */
+    public Facultys getFacultyId() {
+        return facultyId;
+    }
+
+    /**
+     * @param facultyId the facultyId to set
+     */
+    public void setFacultyId(Facultys facultyId) {
+        this.facultyId = facultyId;
     }
 }

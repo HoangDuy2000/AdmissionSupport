@@ -5,6 +5,7 @@
  */
 package com.vhd.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -15,6 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -25,48 +29,49 @@ import javax.persistence.Table;
 public class Accounts implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
+    private Integer id;
+    @NotNull(message = "{accounts.username.notNullErr}")
+    private String username;
+    @NotNull(message = "{accounts.password.notNullErr}")
     private String password;
+    @NotNull(message = "{accounts.firstname.notNullErr}")
     private String first_name;
+    @NotNull(message = "{accounts.lastname.notNullErr}")
     private String last_name;
+    @NotNull(message = "{accounts.avatar.notNullErr}")
     private String avatar;
+    @NotNull(message = "{accounts.email.notNullErr}")
     private String email;
     private boolean active;
     @ManyToOne
     @JoinColumn(name="roles_id")
     private Roles roles;
     @OneToMany(mappedBy = "accountsId")
-    private Set<News> newsSet;
+    @JsonIgnore
+    private Set<Questions> questionSet;
+    @Transient
+    private MultipartFile file;
 
+    public Accounts() {
+    }
+    
+    
+    public Accounts(Integer id){
+        this.id = id;
+    }
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
     /**
      * @return the password
      */
@@ -168,15 +173,36 @@ public class Accounts implements Serializable{
     /**
      * @return the newsSet
      */
-    public Set<News> getNewsSet() {
-        return newsSet;
+    
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * @param newsSet the newsSet to set
+     * @param username the username to set
      */
-    public void setNewsSet(Set<News> newsSet) {
-        this.newsSet = newsSet;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * @return the newsSet
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
 
 }

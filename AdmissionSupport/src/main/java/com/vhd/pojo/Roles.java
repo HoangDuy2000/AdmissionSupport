@@ -5,6 +5,7 @@
  */
 package com.vhd.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -23,22 +24,31 @@ import javax.persistence.Table;
 public class Roles implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     @OneToMany(mappedBy = "roles")
+    @JsonIgnore
     private Set<Accounts> accountsSet;
+
+    public Roles() {
+    }
+
+    public Roles(Integer id) {
+        this.id = id;
+    }
+    
     
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

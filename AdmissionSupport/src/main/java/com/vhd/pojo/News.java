@@ -6,15 +6,20 @@
 package com.vhd.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -22,35 +27,45 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "news")
-public class News implements Serializable{
+public class News implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+    @NotNull(message = "{news.title.notNullMsg}")
+    @Size(min = 10, max = 500, message = "{news.title.lenErr}")
     private String title;
+    @Size(min = 10, max = 1000, message = "{news.content.lenErr}")
     private String content;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date;
     @ManyToOne
-    @JoinColumn(name = "type_id")
+    @JoinColumn(name = "type_id", referencedColumnName = "id")
     private TypeNews typesId;
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Facultys facultysId;
-    @ManyToOne
-    @JoinColumn(name = "acount_id")
-    private Accounts accountsId;
-    @OneToMany(mappedBy = "newsId")
-    private Set<ChatNews> chatnewsSet;
+
+    public News() {
+    }
+
+    public News(Integer id) {
+        this.id = id;
+    }
 
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -81,6 +96,7 @@ public class News implements Serializable{
     public void setContent(String content) {
         this.content = content;
     }
+
     /**
      * @return the typesId
      */
@@ -110,31 +126,18 @@ public class News implements Serializable{
     }
 
     /**
-     * @return the accountsId
-     */
-    public Accounts getAccountsId() {
-        return accountsId;
-    }
-
-    /**
-     * @param accountsId the accountsId to set
-     */
-    public void setAccountsId(Accounts accountsId) {
-        this.accountsId = accountsId;
-    }
-
-    /**
      * @return the chatnewsSet
+    /**
+     * @return the date
      */
-    public Set<ChatNews> getChatnewsSet() {
-        return chatnewsSet;
+    public Date getDate() {
+        return date;
     }
 
     /**
-     * @param chatnewsSet the chatnewsSet to set
+     * @param date the date to set
      */
-    public void setChatnewsSet(Set<ChatNews> chatnewsSet) {
-        this.chatnewsSet = chatnewsSet;
+    public void setDate(Date date) {
+        this.date = date;
     }
-
 }

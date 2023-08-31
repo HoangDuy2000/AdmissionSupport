@@ -5,6 +5,7 @@
  */
 package com.vhd.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -16,6 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -26,28 +31,34 @@ import javax.persistence.Table;
 public class Lives implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+    @NotNull(message = "{lives.tiltle.notNullErr}")
     private String tiltle;
     private String description;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date date;
     private String location;
-    @ManyToOne
-    @JoinColumn(name = "acounts_id")
-    private Accounts account;
     @OneToMany(mappedBy = "livesId")
+    @JsonIgnore
     private Set<Questions> questionsSet;
 
+    public Lives() {
+    }
+    
+    public Lives(Integer id){
+        this.id = id;
+    }
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -105,20 +116,6 @@ public class Lives implements Serializable{
      */
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    /**
-     * @return the account
-     */
-    public Accounts getAccount() {
-        return account;
-    }
-
-    /**
-     * @param account the account to set
-     */
-    public void setAccount(Accounts account) {
-        this.account = account;
     }
 
     /**

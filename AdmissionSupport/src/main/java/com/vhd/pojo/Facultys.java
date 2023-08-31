@@ -5,9 +5,11 @@
  */
 package com.vhd.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +18,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -26,30 +30,42 @@ import javax.persistence.Temporal;
 public class Facultys implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+    @NotNull(message = "{facultys.name.notNullErr}")
     private String name;
     private String description;
     private String location;
     private String email;
+    private Boolean active;
     @Column(name = "created_date")
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdDate;
     @OneToMany(mappedBy = "facultysId")
+    @JsonIgnore
     private Set<News> newsSet;
     @OneToMany(mappedBy = "facultyId")
+    @JsonIgnore
     private Set<Scores> scoresSet;
 
+    public Facultys() {
+    }
+    
+    public Facultys(Integer id) {
+        this.id = id;
+    }
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -150,5 +166,20 @@ public class Facultys implements Serializable{
     public void setScoresSet(Set<Scores> scoresSet) {
         this.scoresSet = scoresSet;
     }
+
+    /**
+     * @return the active
+     */
+    public Boolean getActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+   
 
 }

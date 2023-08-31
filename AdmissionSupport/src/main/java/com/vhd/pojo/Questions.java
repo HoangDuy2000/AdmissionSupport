@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -24,24 +25,31 @@ import javax.persistence.Table;
 public class Questions implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String content;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @ManyToOne
-    @JoinColumn(name = "lives_id")
+    @JoinColumn(name = "lives_id", referencedColumnName = "id")
     private Lives livesId;
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Accounts accountsId;
 
+    public Questions() {
+    }
+    
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -77,13 +85,41 @@ public class Questions implements Serializable{
      * @return the lives
      */
     public Lives getLives() {
-        return livesId;
+        return getLivesId();
     }
 
     /**
      * @param lives the lives to set
      */
     public void setLives(Lives lives) {
-        this.livesId = lives;
+        this.setLivesId(lives);
+    }
+
+    /**
+     * @return the livesId
+     */
+    public Lives getLivesId() {
+        return livesId;
+    }
+
+    /**
+     * @param livesId the livesId to set
+     */
+    public void setLivesId(Lives livesId) {
+        this.livesId = livesId;
+    }
+
+    /**
+     * @return the accountsId
+     */
+    public Accounts getAccountsId() {
+        return accountsId;
+    }
+
+    /**
+     * @param accountsId the accountsId to set
+     */
+    public void setAccountsId(Accounts accountsId) {
+        this.accountsId = accountsId;
     }
 }

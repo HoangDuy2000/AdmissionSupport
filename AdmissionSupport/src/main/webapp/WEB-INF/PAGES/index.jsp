@@ -4,36 +4,48 @@
     Author     : PC
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Hỗ Trợ Tuyển Sinh</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Admission Support</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                    </ul>
+
+<c:url value="/" var="action" />
+<nav class="container mt-5">
+    <nav>
+        <h1 class="mt-4 mb-4 text-uppercase text-center"><strong>Danh Sách Tin Tuyển Sinh</strong></h1>
+        <div class="row mt-3">
+            <c:forEach items="${news}" var="n">
+                <div class="card-body" style="height: 270px">
+                    <h3 class="text-uppercase text-center"><strong><a href="#" class="text-decoration-none">${n.title}</a></strong></h3>
+                    <h5 class="mt-3">
+                        <a href="#" class="badge bg-secondary text-decoration-none">${n.typesId.name}</a>
+                        <a href="#" class="badge bg-secondary text-decoration-none">${n.facultysId.name}</a>
+                    </h5>
+                    <div class="card-text overflow-hidden" style="height: 100px">
+                        <p>${n.content}</p>
+                    </div>
+                    <div class="d-flex flex-row-reverse">
+                        <c:url value="/news/${n.id}" var="api" />
+                        <button class="btn btn-danger ms-2" onclick="deleteItems('${api}')">Xoá</button>
+                        <a href="${api}" class="btn btn-warning ms-2">Cập Nhập</a>
+                    </div> 
                 </div>
-            </div>
-        </nav>
-    </body>
-</html>
+            </c:forEach>
+        </div>
+    </nav>
+    <c:if test="${pages > 1}">
+        <ul class="pagination justify-content-center" style="margin:20px 0">
+            <li class="page-item">
+                <a class="page-link" href="${action}">Tất cả</a>
+            </li>
+            <c:forEach begin="1" end="${pages}" var="i">
+                <c:url value="/" var="pageUrl">
+                    <c:param name="page" value="${i}" />
+                </c:url>
+                <li class="page-item">
+                    <a class="page-link" href="${pageUrl}" >${i}</a>
+                </li>
+            </c:forEach>
+        </ul>
+    </c:if>
+    <a href="<c:url value="/news" />" class="btn btn-success">Thêm tin tuyển sinh</a>
+</nav>
+<script src="<c:url value="/js/main.js" />"></script>

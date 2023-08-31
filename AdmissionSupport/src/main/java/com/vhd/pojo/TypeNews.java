@@ -5,8 +5,10 @@
  */
 package com.vhd.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,21 +25,30 @@ import javax.persistence.Table;
 public class TypeNews implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Basic(optional = false)
+    private Integer id;
     private String name;
     @OneToMany(mappedBy = "typesId")
+    @JsonIgnore
     private Set<News> newsSet;
+
+    public TypeNews() {
+    }
+    
+    public TypeNews(Integer id) {
+        this.id = id;
+    }
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
