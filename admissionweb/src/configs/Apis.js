@@ -1,5 +1,6 @@
+
 import axios from "axios";
-import cookie from "react-cookies";
+import cookie from "react-cookie";
 
 const SERVER_CONTEXT = "/AdmissionSupport";
 

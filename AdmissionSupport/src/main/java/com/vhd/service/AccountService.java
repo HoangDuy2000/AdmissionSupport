@@ -7,7 +7,9 @@ package com.vhd.service;
 
 import com.vhd.pojo.Accounts;
 import java.util.List;
+import java.util.Map;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -20,4 +22,5 @@ public interface AccountService extends UserDetailsService{
     Accounts getAccountById(int id);
     Accounts getAccountByname(String username);
     boolean authUser(String username, String password);
+    Accounts addAccount(Map<String, String> params, MultipartFile avatar);
 }

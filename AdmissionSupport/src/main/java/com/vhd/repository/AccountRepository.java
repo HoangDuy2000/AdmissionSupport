@@ -20,4 +20,5 @@ public interface AccountRepository {
     Accounts getAccountById(int id);
     Accounts getAccountByname(String username);
     boolean authUser(String username, String password);
+    Accounts addAccount(Accounts account);
 }

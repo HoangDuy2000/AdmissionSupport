@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Form, Nav, NavDropdown, Navbar, Row, Spinner } from "react-bootstrap";
 import Apis, { endpoint } from "../configs/Apis";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { MyUserContext } from "../App";
 
 const Header = () => {
+    const [user, dispatch] = useContext(MyUserContext);
     const [typenews, setTypeNews] = useState(null);
     const [kw, setKw] = useState();
     const nav = useNavigate();
@@ -20,6 +22,12 @@ const Header = () => {
     const search = (evt) =>{
         evt.preventDefault();
         nav(`/news?kw=${kw}`);
+    }
+
+    const logout = () => {
+        dispatch({
+            "type": "logout"
+        })
     }
 
     if (typenews === null)
@@ -41,7 +49,15 @@ const Header = () => {
                     <NavDropdown.Item href="#action/3.1">Lịch livestream</NavDropdown.Item>
                     <NavDropdown.Item href="#action/3.1">Câu Hỏi Thường Gặp</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="#link">Đăng Nhập</Nav.Link>
+                {user === null ? <>
+                        <Link className="nav-link text-danger" to="/login">Đăng nhập</Link>
+                        <Link className="nav-link text-danger" >Đăng ký</Link>
+                        
+                       
+                    </>: <>
+                        <Link className="nav-link text-danger" to="/">Chào {user.username}!</Link>
+                        <Button variant="secondary" onClick={logout}>Đăng xuất</Button>
+                    </>}
                 </Nav>
                 </Navbar.Collapse>
                 <Form inline onSubmit={search}>

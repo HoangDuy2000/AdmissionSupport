@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import cookie from "react-cookies";
 import { Navigate, useSearchParams } from "react-router-dom";
 import { MyUserContext } from "../App";
-import Apis, { authApi, endpoints } from "../configs/Apis";
+import Apis, { authApis, endpoint } from "../configs/Apis";
 
 const Login = () => {
     const [user, dispatch] = useContext(MyUserContext);
@@ -16,13 +16,13 @@ const Login = () => {
         
         const process = async () => {
             try {
-                let res = await Apis.post(endpoints['login'], {
+                let res = await Apis.post(endpoint['login'], {
                     "username": username,
                     "password": password
                 });
                 cookie.save("token", res.data);
                 
-                let {data} = await authApi().get(endpoints['current-user']);
+                let {data} = await authApis().get(endpoint['current-user']);
                 cookie.save("user", data);
 
                 dispatch({

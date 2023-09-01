@@ -107,5 +107,13 @@ public class AccountRepositoryImpl implements AccountRepository{
 
         return this.passwordEncoder.matches(password, u.getPassword());
     }
+
+    @Override
+    public Accounts addAccount(Accounts account) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        s.save(account);
+
+        return account;
+    }
     
 }
