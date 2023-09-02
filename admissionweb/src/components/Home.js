@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Apis, { endpoint } from "../configs/Apis";
-import { Button, Card, Carousel, Col, Nav, Row, Spinner } from "react-bootstrap";
+import { Card, Carousel, Col, Nav, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -62,11 +62,12 @@ const Home = () => {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-            <div class="mt-4">
                 <Row>
                     {news.map(n => {
-                        return <Col xs={4}>
-                            <Card class="">
+                        let url = `/news/${n.id}`;
+                        return <Col xs={6} md={4}>
+                            <div class="mt-4">
+                            <Card>
                             <Card.Body style={{ height: '270px' }}>
                                 <Card.Title class="text-center text-uppercase" style={{height: '70px'}}><strong><Link class={"text-decoration-none"}>{n.title}</Link></strong></Card.Title>
                                 <h5>
@@ -76,13 +77,13 @@ const Home = () => {
                                 <Card.Text class={"overflow-hidden"} style={{ height: '75px' }}>
                                     {n.content}
                                 </Card.Text>
-                                <Button variant="primary">Đọc Tin</Button>
+                                <Link to={url} className="btn btn-info" style={{marginRight: "5px"}} variant="primary">Đọc Tin</Link>
                             </Card.Body>
                             </Card>
+                            </div>
                         </Col>
                     })}
                 </Row>
-            </div>
         </Nav>
     </>
 }

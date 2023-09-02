@@ -106,7 +106,8 @@ public class AccountServiceImpl implements AccountService{
         u.setEmail(params.get("email"));
         u.setUsername(params.get("username"));
         u.setPassword(this.passwordEncoder.encode(params.get("password")));
-        u.setRoles(roleService.getRoles().get(3));
+        u.setActive(true);
+        u.setRoles(roleService.getRoles().get(2));
         if (!avatar.isEmpty()) {
             try {
                 Map res = this.cloudinary.uploader().upload(avatar.getBytes(), 

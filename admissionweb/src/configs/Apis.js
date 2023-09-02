@@ -1,6 +1,6 @@
 
 import axios from "axios";
-import cookie from "react-cookie";
+import cookie from "react-cookies";
 
 const SERVER_CONTEXT = "/AdmissionSupport";
 
@@ -10,7 +10,10 @@ export const endpoint = {
     "facultys": `${SERVER_CONTEXT}/api/facultys/`,
     "login": `${SERVER_CONTEXT}/api/login/`,
     "current-user": `${SERVER_CONTEXT}/api/current-user/`,
-    "register": `${SERVER_CONTEXT}/api/users/`,
+    "register": `${SERVER_CONTEXT}/api/accounts/`,
+    "details": (newsId) => `${SERVER_CONTEXT}/api/news/${newsId}/`,
+    "comments": (newsId) => `${SERVER_CONTEXT}/api/news/${newsId}/comments/`,
+    "add-comment": `${SERVER_CONTEXT}/api/comments/`,
 }
 
 export const authApis = () => {

@@ -51,7 +51,7 @@ const Header = () => {
                 </NavDropdown>
                 {user === null ? <>
                         <Link className="nav-link text-danger" to="/login">Đăng nhập</Link>
-                        <Link className="nav-link text-danger" >Đăng ký</Link>
+                        <Link className="nav-link text-danger" to="/register">Đăng ký</Link>
                         
                        
                     </>: <>

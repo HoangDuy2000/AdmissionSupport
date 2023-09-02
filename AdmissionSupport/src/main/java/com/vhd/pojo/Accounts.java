@@ -49,6 +49,9 @@ public class Accounts implements Serializable{
     @OneToMany(mappedBy = "accountsId")
     @JsonIgnore
     private Set<Questions> questionSet;
+    @OneToMany(mappedBy = "accountId")
+    @JsonIgnore
+    private Set<Comment> commentSet;
     @Transient
     private MultipartFile file;
 
@@ -203,6 +206,34 @@ public class Accounts implements Serializable{
      */
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    /**
+     * @return the questionSet
+     */
+    public Set<Questions> getQuestionSet() {
+        return questionSet;
+    }
+
+    /**
+     * @param questionSet the questionSet to set
+     */
+    public void setQuestionSet(Set<Questions> questionSet) {
+        this.questionSet = questionSet;
+    }
+
+    /**
+     * @return the commentSet
+     */
+    public Set<Comment> getCommentSet() {
+        return commentSet;
+    }
+
+    /**
+     * @param commentSet the commentSet to set
+     */
+    public void setCommentSet(Set<Comment> commentSet) {
+        this.commentSet = commentSet;
     }
 
 }

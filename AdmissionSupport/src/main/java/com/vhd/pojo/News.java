@@ -5,6 +5,7 @@
  */
 package com.vhd.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -16,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -47,6 +49,9 @@ public class News implements Serializable {
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Facultys facultysId;
+    @OneToMany(mappedBy = "newsId")
+    @JsonIgnore
+    private Set<Comment> commentSet;
 
     public News() {
     }
@@ -139,5 +144,19 @@ public class News implements Serializable {
      */
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    /**
+     * @return the commentSet
+     */
+    public Set<Comment> getCommentSet() {
+        return commentSet;
+    }
+
+    /**
+     * @param commentSet the commentSet to set
+     */
+    public void setCommentSet(Set<Comment> commentSet) {
+        this.commentSet = commentSet;
     }
 }

@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class JwtService {
-    public static final String SECRET__KEY ="11223344124214";
+    public static final String SECRET__KEY ="11223344124214111111111111111111";
     public static final byte[] SHARED_SECRET_KEY = SECRET__KEY.getBytes();
     public static final int EXPIRE_TIME = 86400000;
     

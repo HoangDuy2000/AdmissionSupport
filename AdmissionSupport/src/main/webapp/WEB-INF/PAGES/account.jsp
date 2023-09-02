@@ -51,8 +51,8 @@
     <div class="form-floating mb-3 mt-3">
         <form:input type="file" class="form-control" path="file" id="file"/>
         <label for="file">Avatar</label>
-        <c:if test="${accounts.image != null}">
-            <img src="${accounts.image}" width="120" />
+        <c:if test="${accounts.avatar != null}">
+            <img src="${accounts.avatar}" width="120" />
         </c:if>
     </div>
     <div class="form-floating">

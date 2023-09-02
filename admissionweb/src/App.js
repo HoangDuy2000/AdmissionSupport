@@ -10,6 +10,9 @@ import Login from "./components/Login";
 import { createContext, useReducer } from "react";
 import MyUserReducer from "./reducers/MyUserReducer";
 import cookie from "react-cookies";
+import Register from "./components/Register";
+import NewsDetails from "./components/NewsDetails";
+import 'moment/locale/vi';
 
 export const MyUserContext = createContext();
 
@@ -23,6 +26,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/news" element={<News/>}/>
+        <Route path="/news/:newsId" element={<NewsDetails />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/facultys" element={<Facultys/>}/>
         <Route path="/login" element={<Login/>}/>
       </Routes>
