@@ -40,4 +40,9 @@ public class ScoreServiceImpl implements ScoreService{
     public boolean deleteScore(int id) {
         return this.scoreRepo.deleteScore(id);
     }
+
+    @Override
+    public List<Scores> getScores(int facultysId) {
+        return this.scoreRepo.getScores(facultysId);
+    }
 }

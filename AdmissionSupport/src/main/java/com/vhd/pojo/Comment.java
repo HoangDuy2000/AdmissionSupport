@@ -26,9 +26,10 @@ import javax.persistence.Temporal;
 public class Comment implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String content;
     @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(name = "createDate")
     private Date createdDate;
     @ManyToOne
     @JoinColumn(name = "account_id")
@@ -40,14 +41,14 @@ public class Comment implements Serializable{
     /**
      * @return the id
      */
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

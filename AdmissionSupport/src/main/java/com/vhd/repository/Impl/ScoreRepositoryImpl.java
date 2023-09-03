@@ -73,5 +73,14 @@ public class ScoreRepositoryImpl implements ScoreRepository{
             return false;
         }
     }
+
+    @Override
+    public List<Scores> getScores(int facultysId) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("From Scores Where facultyId.id=:id");
+        q.setParameter("id", facultysId);
+
+        return q.getResultList();
+    }
     
 }

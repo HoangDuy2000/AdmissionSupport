@@ -11,9 +11,16 @@ export const endpoint = {
     "login": `${SERVER_CONTEXT}/api/login/`,
     "current-user": `${SERVER_CONTEXT}/api/current-user/`,
     "register": `${SERVER_CONTEXT}/api/accounts/`,
-    "details": (newsId) => `${SERVER_CONTEXT}/api/news/${newsId}/`,
-    "comments": (newsId) => `${SERVER_CONTEXT}/api/news/${newsId}/comments/`,
+    "news-details": (id) => `${SERVER_CONTEXT}/api/news/${id}/`,
+    "comments": (id) => `${SERVER_CONTEXT}/api/news/${id}/comments/`,
+    "facultys-details": (id) => `${SERVER_CONTEXT}/api/facultys/${id}/`,
+    "scores": (id) => `${SERVER_CONTEXT}/api/facultys/${id}/scores/`,
     "add-comment": `${SERVER_CONTEXT}/api/comments/`,
+    "lives": `${SERVER_CONTEXT}/api/lives/`,
+    "lives-details": (id) => `${SERVER_CONTEXT}/api/lives/${id}/`,
+    "questions": (id) => `${SERVER_CONTEXT}/api/lives/${id}/questions/`,
+    "add-question": `${SERVER_CONTEXT}/api/questions/add/`,
+    "list-questions": `${SERVER_CONTEXT}/api/questions/`
 }
 
 export const authApis = () => {

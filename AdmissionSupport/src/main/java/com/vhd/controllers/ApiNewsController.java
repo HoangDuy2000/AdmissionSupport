@@ -36,7 +36,7 @@ public class ApiNewsController {
     @Autowired
     private NewsService newsService;
     
-     @Autowired
+    @Autowired
     private CommentService commentService;
     
     @DeleteMapping("/news/{newsId}")

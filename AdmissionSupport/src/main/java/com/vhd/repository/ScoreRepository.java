@@ -17,4 +17,5 @@ public interface ScoreRepository {
     boolean addOrUpdateScore(Scores n);
     Scores getScoreById(int id);
     boolean deleteScore(int id);
+    List<Scores> getScores(int facultysId);
 }

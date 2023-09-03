@@ -17,4 +17,6 @@ public interface QuestionRepository {
     boolean addOrUpdateQuestion(Questions ques);
     Questions getQuestionById(int id);
     boolean deleteQuestion(int id);
+    Questions addQuestion (Questions ques);
+    List<Questions> getQuestions(int livesId);
 }

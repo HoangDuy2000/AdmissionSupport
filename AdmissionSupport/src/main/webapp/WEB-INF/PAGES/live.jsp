@@ -11,7 +11,7 @@
 <h1 class="text-center text-info mt-1">QUẢN LÝ LỊCH LIVESTREAM</h1>
 
 <c:url value="/lives/" var="action" />
-<form:form modelAttribute="live" method="post" 
+<form:form modelAttribute="lives" method="post" 
            action="${action}" enctype="multipart/form-data">
     <form:errors path="*" element="div" cssClass="alert alert-danger" />
     <form:hidden path="id"/>
@@ -42,7 +42,7 @@
     <div class="form-floating mb-3 mt-3">
         <button type="submit" class="btn btn-info" >
             <c:choose>
-                <c:when test="${live.id != null}">Cập nhật Lịch Live</c:when>
+                <c:when test="${lives.id != null}">Cập nhật Lịch Live</c:when>
                 <c:otherwise>Thêm Lịch Live</c:otherwise>
             </c:choose>
         </button>

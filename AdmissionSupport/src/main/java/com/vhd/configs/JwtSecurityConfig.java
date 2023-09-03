@@ -66,9 +66,16 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter{
         http.authorizeRequests().antMatchers("/api/news/").permitAll();
         http.authorizeRequests().antMatchers("/api/news/**").permitAll();
         http.authorizeRequests().antMatchers("/api/facultys/").permitAll();
+        http.authorizeRequests().antMatchers("/api/facultys/**").permitAll();
         http.authorizeRequests().antMatchers("/api/typenews/").permitAll();
+        http.authorizeRequests().antMatchers("/api/lives/").permitAll();
+        http.authorizeRequests().antMatchers("/api/lives/**").permitAll();
         http.authorizeRequests().antMatchers("/api/accounts/").permitAll();
+        http.authorizeRequests().antMatchers("/api/questions/").permitAll();
+        http.authorizeRequests().antMatchers("/api/questions/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/**/comments/").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/**/scores/").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/**/questions/").permitAll();
         http.antMatcher("/api/**").httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")

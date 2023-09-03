@@ -1,4 +1,4 @@
-import { Button, Card, Col, Nav, Row, Spinner } from "react-bootstrap";
+import { Card, Col, Nav, Row, Spinner } from "react-bootstrap";
 import { Link, useSearchParams } from "react-router-dom";
 import Apis, { endpoint } from "../configs/Apis";
 import { useEffect, useState } from "react";
@@ -35,6 +35,7 @@ const News = () => {
         <Nav>
             <Row>
                 {news.map(n => {
+                    let url = `/news/${n.id}`;
                     return <Col xs={6} md={4}>
                         <div class="mt-4">
                             <Card>
@@ -47,7 +48,7 @@ const News = () => {
                                 <Card.Text class={"overflow-hidden"} style={{ height: '75px' }}>
                                     {n.content}
                                 </Card.Text>
-                                <Button variant="primary">Đọc Tin</Button>
+                                <Link to={url} className="btn btn-info" style={{marginRight: "5px"}} variant="primary">Đọc Tin</Link>
                             </Card.Body>
                             </Card>
                         </div>

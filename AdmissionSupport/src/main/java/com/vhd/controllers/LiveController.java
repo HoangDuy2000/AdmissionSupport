@@ -28,20 +28,20 @@ public class LiveController {
     
     @GetMapping("/lives/")
     public String list(Model model) {
-        model.addAttribute("live", new Lives());
+        model.addAttribute("lives", new Lives());
         
         return "live";
     }
     
     @GetMapping("/lives/{livesId}")
     public String update(Model model, @PathVariable(value = "livesId") int id) {
-        model.addAttribute("live", this.liveService.getLiveById(id));
+        model.addAttribute("lives", this.liveService.getLiveById(id));
         
         return "live";
     }
     
     @PostMapping("/lives/")
-    public String add(@ModelAttribute(value = "live") @Valid Lives l, BindingResult rs) {
+    public String add(@ModelAttribute(value = "lives") @Valid Lives l, BindingResult rs) {
         if (!rs.hasErrors())
             if (this.liveService.addOrUpdateLive(l) == true)
                 return "redirect:/lives";

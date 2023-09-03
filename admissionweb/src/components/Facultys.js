@@ -28,11 +28,12 @@ const Facultys = () => {
             <h1 class="mt-3 text-center text-uppercase"><strong>Danh Sách Khoa</strong></h1>
             <Row>
                 {facultys.map(f => {
+                    let url = `/facultys/${f.id}`;
                     return <Col xs={6} md={4}>
                         <div class="mt-4">
                             <Card>
                             <Card.Body style={{ height: '200px'}}>
-                                <Card.Title class="text-center text-uppercase" style={{height: '40px'}}><strong><Link class={"text-decoration-none"}>{f.name}</Link></strong></Card.Title>
+                                <Card.Title class="text-center text-uppercase" style={{height: '40px'}}><strong><Link to={url} class={"text-decoration-none"}>{f.name}</Link></strong></Card.Title>
                                 <Card.Text class={"overflow-hidden"} style={{ height: '75px' }}>
                                     {f.description}
                                 </Card.Text>

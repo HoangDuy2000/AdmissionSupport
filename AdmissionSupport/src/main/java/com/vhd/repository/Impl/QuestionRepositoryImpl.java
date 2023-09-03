@@ -85,5 +85,26 @@ public class QuestionRepositoryImpl implements QuestionRepository{
             return false;
         }
     }
+
+    @Override
+    public Questions addQuestion(Questions ques) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            s.save(ques);
+            return ques;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Questions> getQuestions(int livesId) {
+        Session s = this.sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("From Questions Where livesId.id=:id");
+        q.setParameter("id", livesId);
+
+        return q.getResultList();
+    }
     
 }

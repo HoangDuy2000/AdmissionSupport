@@ -30,7 +30,7 @@ public class CommentRepositoryImpl implements CommentRepository{
     @Override
     public List<Comment> getComments(int newsId) {
         Session s = this.sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("From Comment Where product.id=:id");
+        Query q = s.createQuery("From Comment Where newsId.id=:id");
         q.setParameter("id", newsId);
 
         return q.getResultList();

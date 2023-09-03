@@ -40,4 +40,14 @@ public class QuestionServiceImpl implements QuestionService{
     public boolean deleteQuestion(int id) {
         return this.deleteQuestion(id);
     }
+
+    @Override
+    public Questions addQuestion(Questions ques) {
+        return this.questionRepo.addQuestion(ques);
+    }
+
+    @Override
+    public List<Questions> getQuestions(int livesId) {
+        return this.questionRepo.getQuestions(livesId);
+    }
 }

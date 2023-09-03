@@ -13,6 +13,10 @@ import cookie from "react-cookies";
 import Register from "./components/Register";
 import NewsDetails from "./components/NewsDetails";
 import 'moment/locale/vi';
+import FacultyDetail from "./components/FacultyDetails";
+import Lives from "./components/Lives";
+import Questions from "./components/Questions";
+import LiveDetails from "./components/LiveDetails";
 
 export const MyUserContext = createContext();
 
@@ -27,9 +31,13 @@ const App = () => {
         <Route path="/" element={<Home/>}/>
         <Route path="/news" element={<News/>}/>
         <Route path="/news/:newsId" element={<NewsDetails />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/lives" element={<Lives/>}/>
+        <Route path="/lives/:livesId" element={<LiveDetails />} />
+        <Route path="/questions" element={<Questions/>}/>
         <Route path="/facultys" element={<Facultys/>}/>
+        <Route path="/facultys/:facultysId" element={<FacultyDetail />} />
         <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register />} />
       </Routes>
       </Container>
       <Footer/>
